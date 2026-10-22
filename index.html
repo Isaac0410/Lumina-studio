@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LÚMINA STUDIO | Velas Aromáticas Artesanales</title>
+<meta name="description" content="Velas aromáticas artesanales hechas a mano en Costa Rica. Enciende un momento. Crea una atmósfera.">
+<style>
+/* ---------- 1. Variables: cambia colores y tipografías aquí ---------- */
+:root{
+  --ceniza:#E4E7DF; --marfil:#F6F4EE; --bosque:#1F2A24; --musgo:#3D5145;
+  --llama:#C98A2B; --tinta:#232823; --suave:#5E655F;
+  --noche:#2A1830; --calabaza:#E8792B;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --sans:"Avenir Next","Helvetica Neue",Segoe UI,Roboto,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{font-family:var(--sans);color:var(--tinta);background:var(--marfil);line-height:1.65}
+img,svg{max-width:100%}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--llama);outline-offset:3px}
+.wrap{width:min(1120px,92%);margin-inline:auto}
+section{padding:90px 0}
+h1,h2,h3{font-family:var(--serif);font-weight:500;line-height:1.15}
+h2{font-size:clamp(1.9rem,4vw,2.7rem);margin-bottom:14px}
+.lead{color:var(--suave);max-width:52ch;margin-bottom:44px}
+
+/* ---------- 2. Botones ---------- */
+.btn{display:inline-block;padding:13px 26px;border-radius:40px;font-size:.95rem;text-decoration:none;
+  border:1.5px solid var(--bosque);cursor:pointer;transition:.25s;font-family:inherit;background:none;color:var(--bosque)}
+.btn:hover{background:var(--bosque);color:var(--marfil)}
+.btn.wa{background:var(--llama);border-color:var(--llama);color:#fff}
+.btn.wa:hover{background:#a86f1c;border-color:#a86f1c}
+.btn.sm{padding:9px 18px;font-size:.85rem;width:100%;text-align:center}
+
+/* ---------- 3. Navegación ---------- */
+header{position:fixed;inset:0 0 auto 0;z-index:50;background:rgba(246,244,238,.92);backdrop-filter:blur(8px);border-bottom:1px solid #0001}
+nav{display:flex;justify-content:space-between;align-items:center;height:68px}
+.logo{font-family:var(--serif);font-size:1.5rem;letter-spacing:.28em;text-decoration:none}
+.links{display:flex;gap:30px;list-style:none}
+.links a{text-decoration:none;font-size:.92rem;color:var(--suave);transition:.2s}
+.links a:hover{color:var(--llama)}
+.burger{display:none;background:none;border:0;font-size:1.7rem;cursor:pointer;color:var(--tinta)}
+
+/* ---------- 4. Hero ---------- */
+.hero{min-height:100vh;display:flex;align-items:center;padding-top:110px;background:var(--bosque);color:var(--marfil);overflow:hidden;position:relative}
+.hero::before{content:"";position:absolute;right:8%;top:50%;width:520px;height:520px;transform:translateY(-50%);
+  background:radial-gradient(circle,#c98a2b55 0%,transparent 65%);animation:brillo 4s ease-in-out infinite alternate}
+.hero .wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center;position:relative}
+.hero small{display:block;color:#cfd6cc;margin-bottom:18px;letter-spacing:.06em}
+.hero h1{font-size:clamp(2.6rem,6.2vw,4.8rem);margin-bottom:22px}
+.hero p{color:#cfd6cc;max-width:44ch;margin-bottom:34px}
+.hero .btn{border-color:var(--marfil);color:var(--marfil)}
+.hero .btn:hover{background:var(--marfil);color:var(--bosque)}
+.hero .btn.wa{border-color:var(--llama);color:#fff}
+.hero .btn.wa:hover{background:#a86f1c;color:#fff}
+.acciones{display:flex;gap:14px;flex-wrap:wrap}
+.hero-vela{display:flex;justify-content:center}
+.hero-vela .candle{transform:scale(2.6);transform-origin:bottom center;margin-top:-60px}
+@keyframes brillo{to{opacity:.55;transform:translateY(-50%) scale(1.08)}}
+
+/* ---------- 5. Vela hecha con CSS (se reutiliza en todo el sitio) ---------- */
+.candle{--c:#d9c7a8;position:relative;width:64px;height:78px;margin:52px auto 0}
+.candle .jar{position:absolute;inset:0;background:var(--c);border-radius:6px 6px 14px 14px;
+  box-shadow:inset -8px 0 14px #0002,inset 6px 0 10px #fff3}
+.candle .jar::after{content:"";position:absolute;left:14%;right:14%;top:34%;height:30%;background:#fff9;border-radius:3px}
+.candle .wick{position:absolute;left:50%;top:-9px;width:2px;height:10px;background:#222;transform:translateX(-50%)}
+.flame{position:absolute;left:50%;top:-38px;width:14px;height:30px;transform:translateX(-50%);
+  background:radial-gradient(ellipse at 50% 75%,#fff6d6 0%,#ffcb5c 40%,#e8792b 75%,transparent 100%);
+  border-radius:50% 50% 50% 50%/65% 65% 35% 35%;transform-origin:bottom;animation:llama 1.6s ease-in-out infinite alternate}
+@keyframes llama{0%{transform:translateX(-50%) scaleY(1) rotate(-2deg)}100%{transform:translateX(-50%) scaleY(1.12) rotate(3deg)}}
+
+/* ---------- 6. Productos ---------- */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 26px;
+  align-items: stretch;
+}
+
+.card {
+  background: #141414;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  border: 1px solid #ffffff14;
+}
+
+.stage {
+  height: 200px;
+  flex: 0 0 200px;
+  display: grid;
+  align-items: center;
+  background: var(--fondo, var(--ceniza));
+  overflow: hidden;
+}
+
+.stage img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card .info {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  min-height: 0;
+}
+
+.card h3 {
+  font-size: 1.3rem;
+  margin: 0;
+}
+
+.card .nota {
+  color: var(--suave);
+  font-size: .9rem;
+  flex: 1;
+}
+
+.precio {
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  color: var(--musgo);
+  margin: 8px 0 12px;
+}
+
+.card .btn {
+  margin-top: auto;
+  display: block;
+  text-align: center;
+}
+
+
+/* ---------- 7. Halloween ---------- */
+.halloween{background:var(--noche);color:#f3e9f5}
+.halloween .lead{color:#c9b5cf}
+.halloween .card{background:#3a2542;border-color:#ffffff14}
+.halloween .card .nota{color:#c9b5cf}
+.halloween .precio{color:var(--calabaza)}
+.halloween .stage{--fondo:#221329}
+.halloween .btn.wa{background:var(--calabaza);border-color:var(--calabaza)}
+.halloween .btn.wa:hover{background:#c25d16;border-color:#c25d16}
+.aviso{display:inline-block;border:1px solid var(--calabaza);color:var(--calabaza);border-radius:30px;padding:4px 16px;font-size:.85rem;margin-bottom:18px}
+
+/* ---------- 8. Sobre nosotros ---------- */
+.sobre .wrap{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.sobre p{color:var(--suave);margin-bottom:16px}
+.sobre .foto{aspect-ratio:4/5;border-radius:200px 200px 6px 6px;background:linear-gradient(170deg,var(--musgo),var(--bosque));
+  display:grid;place-items:end center;padding-bottom:70px;position:relative;overflow:hidden}
+.sobre .foto::before{content:"";position:absolute;top:18%;left:50%;width:260px;height:260px;transform:translateX(-50%);
+  background:radial-gradient(circle,#c98a2b66,transparent 65%)}
+
+/* ---------- 9. Beneficios ---------- */
+.beneficios{background:var(--ceniza)}
+.ben{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:36px}
+.ben div{border-top:2px solid var(--llama);padding-top:18px}
+.ben h3{font-size:1.25rem;margin-bottom:8px}
+.ben p{color:var(--suave);font-size:.95rem}
+
+/* ---------- 10. Testimonios ---------- */
+.testi{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px}
+blockquote{font-family:var(--serif);font-size:1.15rem;line-height:1.5;padding:28px;background:#fff;border-left:3px solid var(--llama)}
+blockquote footer{font-family:var(--sans);font-size:.85rem;color:var(--suave);margin-top:14px}
+
+/* ---------- 11. Instagram ---------- */
+.insta{background:var(--ceniza);text-align:center}
+.insta .lead{margin-inline:auto}
+.fotos{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:36px}
+.foto-ig{aspect-ratio:1;display:grid;align-items:center;background:var(--f);transition:.3s;text-decoration:none}
+.foto-ig:hover{transform:scale(.97)}
+.foto-ig .candle{transform:scale(.8);margin-top:40px}
+
+/* ---------- 12. Contacto y footer ---------- */
+.contacto .wrap{display:grid;grid-template-columns:1fr 1fr;gap:64px}
+.datos{list-style:none;display:grid;gap:16px;color:var(--suave)}
+.datos strong{display:block;color:var(--tinta);font-weight:600}
+form{display:grid;gap:14px}
+input,textarea{width:100%;padding:13px 15px;border:1px solid #0003;border-radius:4px;font:inherit;background:#fff}
+textarea{min-height:120px;resize:vertical}
+#msg{color:var(--musgo);font-size:.9rem;min-height:1.2em}
+footer.pie{background:var(--bosque);color:#cfd6cc;padding:50px 0 30px;text-align:center}
+footer.pie .logo{color:var(--marfil);display:block;margin-bottom:8px}
+footer.pie p{font-size:.85rem}
+footer.pie .mini{margin-top:26px;opacity:.6}
+
+/* ---------- 13. Responsive (teléfonos y tabletas) ---------- */
+@media(max-width:820px){
+  section{padding:64px 0}
+  .burger{display:block}
+  .links{position:absolute;top:68px;left:0;right:0;background:var(--marfil);flex-direction:column;gap:0;
+    max-height:0;overflow:hidden;transition:max-height .3s;border-bottom:1px solid #0001}
+  .links.abierto{max-height:420px}
+  .links a{display:block;padding:15px 5%}
+  .hero .wrap,.sobre .wrap,.contacto .wrap{grid-template-columns:1fr;gap:40px}
+  .hero-vela{order:-1;height:170px;align-items:flex-end}
+  .hero-vela .candle{transform:scale(1.7);margin-top:0}
+  .hero{align-items:flex-start;padding-top:100px}
+  .hero::before{right:50%;transform:translate(50%,-50%);top:26%}
+  .fotos{grid-template-columns:repeat(2,1fr)}
+  .sobre .foto{max-width:360px;margin-inline:auto}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <a class="logo" href="#inicio">LÚMINA</a>
+    <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false">☰</button>
+    <ul class="links" id="links">
+      <li><a href="#coleccion">Colección</a></li>
+      <li><a href="#halloween">Halloween</a></li>
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#beneficios">Beneficios</a></li>
+      <li><a href="#testimonios">Opiniones</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+<section class="hero" id="inicio">
+  <div class="wrap">
+    <div>
+      <small>Velas Aromáticas Artesanales · Hechas en Costa Rica</small>
+      <h1>Enciende un momento. Crea una atmósfera.</h1>
+      <p>Velas artesanales creadas en Costa Rica para transformar espacios cotidianos en momentos especiales.</p>
+      <div class="acciones">
+        <a class="btn" href="#coleccion">Ver colección</a>
+        <a class="btn wa" href="#" data-wa="Hola LÚMINA, quiero información sobre sus velas.">Comprar por WhatsApp</a>
+      </div>
+    </div>
+    <div class="hero-vela" aria-hidden="true">
+     <img src="Images/vela-cafe.png.png" alt="Vela aromática Café de Altura de LÚMINA"style="border-radius: 16px;">
+    </div>
+  </div>
+</section>
+
+<section id="coleccion">
+  <div class="wrap">
+    <h2>Colección destacada</h2>
+    <p class="lead">Nuestras velas más queridas. Cada una tarda tres días en curarse antes de llegar a tu casa.</p>
+    <div class="grid" id="productos"></div>
+  </div>
+</section>
+
+<section class="halloween" id="halloween">
+  <div class="wrap">
+    <span class="aviso">Edición limitada · Octubre</span>
+    <h2>Colección Halloween</h2>
+    <p class="lead">Aromas oscuros y especiados para las noches de octubre. Se agotan cada año, así que reserva la tuya.</p>
+    <div class="grid" id="halloween-grid"></div>
+  </div>
+</section>
+
+<section class="sobre" id="nosotros">
+  <div class="wrap">
+    <div class="foto" aria-hidden="true">
+      <div class="candle" style="--c:#d9c7a8;position:relative;z-index:1"><span class="flame"></span><span class="wick"></span><div class="jar"></div></div>
+    </div>
+    <div>
+      <h2>Sobre LÚMINA</h2>
+      <p>LÚMINA nació en una cocina de Heredia, con una olla, cera de soja y la idea de que la casa debería oler a calma.</p>
+      <p>Hoy seguimos haciendo cada vela a mano, en lotes pequeños, con mechas de algodón y fragancias libres de parafina. Usamos frascos de vidrio reutilizables y empaques reciclables.</p>
+      <p>Creemos que encender una vela es una pequeña pausa en el día. Nuestro trabajo es que esa pausa sea bonita.</p>
+    </div>
+  </div>
+</section>
+
+<section class="beneficios" id="beneficios">
+  <div class="wrap">
+    <h2>Por qué elegir LÚMINA</h2>
+    <p class="lead">Hacemos menos velas para hacerlas mejor.</p>
+    <div class="ben">
+      <div><h3>Cera de soja natural</h3><p>Se quema más limpia y más lenta que la parafina. Hasta 45 horas por vela.</p></div>
+      <div><h3>Hecho a mano</h3><p>Lotes de máximo 30 velas, vertidas y revisadas una por una.</p></div>
+      <div><h3>Aromas locales</h3><p>Café de altura, cacao, cítricos y flores de nuestros paisajes.</p></div>
+      <div><h3>Envíos a todo el país</h3><p>Empacamos con cuidado y enviamos por Correos de Costa Rica o mensajería.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="testimonios">
+  <div class="wrap">
+    <h2>Lo que dicen nuestros clientes</h2>
+    <p class="lead">Opiniones de quienes ya encendieron una LÚMINA.</p>
+    <div class="testi">
+      <blockquote>“El aroma a Café de Altura llena toda la sala sin ser abrumador. Ya voy por mi tercera vela.”<footer>María F., San José</footer></blockquote>
+      <blockquote>“Se las regalé a mi mamá y no dejó de hablar de ellas. El empaque es precioso.”<footer>Andrés R., Cartago</footer></blockquote>
+      <blockquote>“Compré la de Halloween y mi casa olió a otoño por semanas. Muy recomendadas.”<footer>Daniela V., Alajuela</footer></blockquote>
+    </div>
+  </div>
+</section>
+
+<section class="insta">
+  <div class="wrap">
+    <h2>Síguenos en Instagram</h2>
+    <p class="lead">Detrás de cámaras, lotes nuevos y ideas para tu ambiente. @lumina.cr</p>
+    <div class="fotos" aria-hidden="true">
+      <a class="foto-ig" href="#" style="--f:#d8cdb6"><div class="candle" style="--c:#f1e7d3"><span class="flame"></span><span class="wick"></span><div class="jar"></div></div></a>
+      <a class="foto-ig" href="#" style="--f:#b9c5b5"><div class="candle" style="--c:#7d9a83"><span class="flame"></span><span class="wick"></span><div class="jar"></div></div></a>
+      <a class="foto-ig" href="#" style="--f:#2f3a33"><div class="candle" style="--c:#c98a2b"><span class="flame"></span><span class="wick"></span><div class="jar"></div></div></a>
+      <a class="foto-ig" href="#" style="--f:#d9b9a8"><div class="candle" style="--c:#b06a55"><span class="flame"></span><span class="wick"></span><div class="jar"></div></div></a>
+    </div>
+    <a class="btn" href="https://instagram.com" target="_blank" rel="noopener">Ver Instagram</a>
+  </div>
+</section>
+
+<section class="contacto" id="contacto">
+  <div class="wrap">
+    <div>
+      <h2>Contacto</h2>
+      <p class="lead">Pedidos personalizados, regalos corporativos o dudas: escríbenos.</p>
+      <ul class="datos">
+        <li><strong>WhatsApp</strong>+506 8888 8888</li>
+        <li><strong>Correo</strong>hola@lumina.cr</li>
+        <li><strong>Taller</strong>Heredia, Costa Rica (recogida con cita)</li>
+        <li><strong>Horario</strong>Lunes a sábado, 9 a. m. a 6 p. m.</li>
+      </ul>
+    </div>
+    <form id="form">
+      <input type="text" id="nombre" placeholder="Tu nombre" required aria-label="Tu nombre">
+      <input type="email" id="correo" placeholder="Tu correo" required aria-label="Tu correo">
+      <textarea id="mensaje" placeholder="¿En qué te podemos ayudar?" required aria-label="Mensaje"></textarea>
+      <button class="btn wa" type="submit">Enviar mensaje</button>
+      <p id="msg" role="status"></p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer class="pie">
+  <div class="wrap">
+    <span class="logo">LÚMINA</span>
+    <p>Velas Aromáticas Artesanales · Costa Rica</p>
+    <p class="mini">© <span id="anio"></span> LÚMINA. Sitio de ejemplo con fines educativos.</p>
+  </div>
+</footer>
+
+<script>
+/* ---------- Configuración: cambia el número (código de país + número, sin + ni espacios) ---------- */
+const WHATSAPP = "50672120993";
+
+/* ---------- Datos de productos (precios ficticios en colones) ---------- */
+const productos = [
+  {nombre:"Café de Altura", nota:"Café tostado, vainilla y un toque de panela.", precio:9500, color:"#c9a27a", fondo:"#e3d6c2"},
+  {nombre:"Bosque Nuboso", nota:"Musgo, cedro y lluvia fresca de montaña.", precio:10500, color:"#7d9a83", fondo:"#cfd9cd"},
+  {nombre:"Flor de Guaria", nota:"Jazmín, peonía y ámbar suave.", precio:9900, color:"#e6cfd0", fondo:"#efe1dd"},
+  {nombre:"Cacao y Canela", nota:"Chocolate cálido con especias dulces.", precio:11000, color:"#8a5a44", fondo:"#dccbbd"}
+];
+const halloween = [
+  {nombre:"Noche de Brujas", nota:"Higo negro, madera ahumada y clavo.", precio:12500, color:"#5b3a6b", fondo:"#221329"},
+  {nombre:"Calabaza Especiada", nota:"Calabaza asada, canela y nuez moscada.", precio:11500, color:"#e8792b", fondo:"#221329"},
+  {nombre:"Luna Negra", nota:"Lavanda oscura, vainilla y cuero.", precio:12900, color:"#2b2b33", fondo:"#221329"}
+];
+
+const colones = n => "₡" + n.toLocaleString("es-CR");
+const linkWA = texto => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`;
+
+/* ---------- Dibuja las tarjetas de producto ---------- */
+function pintar(lista, contenedor){
+  document.getElementById(contenedor).innerHTML = lista.map(p => `
+    <article class="card">
+      <div class="stage" style="--fondo:${p.fondo}" aria-hidden="true">
+       ${p.nombre === "Café de Altura"
+  ? '<img src="Images/vela-cafe.png.png" alt="Vela Café de Altura" style="width:100%; height:200px; object-fit:cover; border-radius:12px;">'
+  : '<div class="candle" style="--c:' + p.color + '"><span class="flame"></span><span class="wick"></span><div class="jar"></div></div>'
+} </div>
+      <div class="info">
+        <h3>${p.nombre}</h3>
+        <p class="nota">${p.nota}</p>
+        <p class="precio">${colones(p.precio)}</p>
+        <a class="btn wa sm" target="_blank" rel="noopener"
+           href="${linkWA(`Hola LÚMINA, quiero comprar la vela ${p.nombre} (${colones(p.precio)}).`)}">Comprar por WhatsApp</a>
+      </div>
+    </article>`).join("");
+}
+pintar(productos, "productos");
+pintar(halloween, "halloween-grid");
+
+/* ---------- Botones de WhatsApp generales ---------- */
+document.querySelectorAll("[data-wa]").forEach(a => {
+  a.href = linkWA(a.dataset.wa);
+  a.target = "_blank"; a.rel = "noopener";
+});
+
+/* ---------- Menú móvil ---------- */
+const burger = document.getElementById("burger"), links = document.getElementById("links");
+burger.addEventListener("click", () => {
+  const abierto = links.classList.toggle("abierto");
+  burger.setAttribute("aria-expanded", abierto);
+});
+links.addEventListener("click", e => { if(e.target.tagName === "A") links.classList.remove("abierto"); });
+
+/* ---------- Formulario: abre WhatsApp con el mensaje ---------- */
+document.getElementById("form").addEventListener("submit", e => {
+  e.preventDefault();
+  const n = document.getElementById("nombre").value, m = document.getElementById("mensaje").value;
+  window.open(linkWA(`Hola LÚMINA, soy ${n}. ${m}`), "_blank");
+  document.getElementById("msg").textContent = "¡Gracias! Te abrimos WhatsApp para enviar tu mensaje.";
+  e.target.reset();
+});
+
+document.getElementById("anio").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
